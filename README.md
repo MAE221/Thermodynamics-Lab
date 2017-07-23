@@ -4,6 +4,7 @@
 ***
 
 # Tutorials & Documentation
+## [Lab Report Template](https://github.com/MAE221/Thermodynamics-Lab/blob/master/ThermoLabReportTemplate.pdf)
 ***
 
 # Examples
