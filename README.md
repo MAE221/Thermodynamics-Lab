@@ -14,5 +14,5 @@
 ## [Lab 1.1: Calibrating Sensors](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-1.1)
 ## [Lab 1.2: Ideal Gas Law](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-1.2)
 ## [Lab 2.1: Strain Gauges and Thermocouples](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-2.1)
-## [Lab 2.2: Calorimeter Experiment](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-2.2)
+## [Lab 2.2: Specific Heat](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-2.2)
 ***
