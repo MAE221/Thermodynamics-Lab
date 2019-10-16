@@ -16,4 +16,6 @@
 ## [Lab 2.1: Sensor Calibration](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-2.1)
 ## [Lab 2.2: Ideal Gas Law](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-2.2)
 ## [Lab 3: Bomb Calorimeter](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-3)
+## [Lab 4: Shower](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-4)
+## [Lab 5: Refrigerator / Heat Pump](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-5)
 ***
