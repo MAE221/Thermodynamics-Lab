@@ -18,5 +18,5 @@
 ## [Lab 3: Bomb Calorimeter](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-3)
 ## [Lab 4: Hot Shower](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-4)
 ## [Lab 5: Refrigerator / Heat Pump](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-5)
-## [Lab Project](https://github.com/MAE221/Thermodynamics-Lab/wiki/Lab-Project)
+## [Lab Project](https://github.com/MAE221/Thermodynamics-Lab/wiki/MAE221----Lab-Project)
 ***
