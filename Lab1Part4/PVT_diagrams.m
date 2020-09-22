@@ -62,17 +62,11 @@ clear g
 
 %% Convert the Voltage data to Pressure and Temperature measurements
 
-pres = calcPres(presVolt);  % calculate Pressure (psi)
-temp = calcTemp(tempVolt);  % calculate Temperature (K)
-PVT = pres.*volumes./temp;  % calculate P*V/T (psi*mL/K)
+
 
 %% Calculate the uncertainty
 
-% uncertainty in each measurement
-d_volm = 1;         % +/- 1 mL
-d_pres = 0.1*pres;  % 10% error 
-d_temp = 1;         % +/- 1 C
-err = PVT.*sqrt((d_pres./pres).^2+(d_volm./volumes).^2+(d_temp./temp).^2);
+
 
 %% Plot your measurements
 
