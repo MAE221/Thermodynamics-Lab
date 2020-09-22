@@ -77,27 +77,10 @@ err = PVT.*sqrt((d_pres./pres).^2+(d_volm./volumes).^2+(d_temp./temp).^2);
 %% Plot your measurements
 
 % Figure showing Pressure vs Volume
+
 % Figure showing Temperature vs Volume
-lc = [0 0 1];  rc = [1 0 0];
-figure
-set(gcf,'color','w','defaultAxesColorOrder',[lc; rc])
-hold on, xlabel('Volume (mL)')
-yyaxis left
-plot(volumes,pres,'bo','MarkerFaceColor','b','MarkerSize',6)
-ylabel('Pressure (psi)')
-set(gca,'FontSize',16,'LineWidth',2)
-yyaxis right
-plot(volumes,temp-273.15,'ro','MarkerFaceColor','r','MarkerSize',6)
-ylabel('Temperature (C)')
-set(gca,'FontSize',16,'LineWidth',2)
 
 % Figure showing PV/T vs Volume
-figure
-set(gcf,'color','w')
-hold on, xlabel('Volume (mL)')
-errorbar(volumes,PVT,err,err,'ko','MarkerFaceColor','k','MarkerSize',6,'LineWidth',2)
-ylabel('PV/T (psi * mL / K)')
-set(gca,'FontSize',16,'LineWidth',2)
 
 %% Functions for converting Photon Voltage to Pressure & Temperature
 % You may need to edit some of the values in these functions!
