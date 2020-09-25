@@ -87,15 +87,13 @@ Outputs:
 %}
 function pres = calcPres(presVolt)
 
-% parameters for the Photon
-supplyVolt = 4.8;  % Photon supply voltage (V)
-
-% parameters for the pressure sensor
-presRange = 15;  % range of pressure sensor (psi)
-presRef = 14.7;  % reference/atmospheric pressure (psi)
+supplyVolt = 4.8; % Photon supply voltage (V)
+Pmin = -15;       % minimum pressure (psi)
+Pmax = 15;        % maximum pressure (psi)
+presRef = 14.7;   % reference/atmospheric pressure (psi)
 
 % pressure (psi)
-pres = (presVolt - 0.1*supplyVolt) .* presRange./(0.8*supplyVolt) + presRef;
+pres = (presVolt/supplyVolt - 0.1) .* (Pmax-Pmin)/0.8 + Pmin + presRef;
 
 end
 
@@ -107,23 +105,21 @@ Outputs:
 %}
 function temp = calcTemp(tempVolt)
 
-% parameters for the Photon
-supplyVolt = 4.8;  % Photon supply voltage (V)
+supplyVolt = 4.8;           % Photon supply voltage (V)
+tempRefVolt = supplyVolt/2; % op-amp reference voltage (V)
+gainResist = 4.6e3;         % op-amp gain resistance (Ohms)
 
-% parameters for the operational amplifier
-tempRefVolt = supplyVolt/2;  % op-amp reference voltage (V)
-gainResist = 4.6e3;          % op-amp gain resistance (Ohms)
-
-% parameters for the thermistor
+% thermistor temperature coefficients
 A = 3.35e-3;
 B = 2.56e-4;
 C = 2.14e-6;
 D =-7.25e-8;
 
+% un-amplified voltage difference between thermistor and reference
 thermVolt = tempVolt./(1 + 1e5/gainResist);
-thermResRatio = supplyVolt./(thermVolt + tempRefVolt) - 1;
-
+% Rt/R25 (Rt = thermistor resistance, R25 = 10kOhm)
+resRatio = (supplyVolt-thermVolt-tempRefVolt)./(thermVolt+tempRefVolt);
 % temperature (K)
-temp = 1./(A + B*log(thermResRatio) + C*log(thermResRatio).^2 + D*log(thermResRatio).^3);
+temp = 1./(A + B*log(resRatio) + C*log(resRatio).^2 + D*log(resRatio).^3);
 
 end
