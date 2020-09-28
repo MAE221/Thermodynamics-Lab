@@ -43,7 +43,7 @@ tempVolt = zeros(size(volumes));  % array to store Temperature voltages
 
 % loop through each Volume measurement
 for i = 1:length(volumes)
-    fprintf('Move plunger to %3d mL, then press Enter\n',volumes(i))
+    fprintf('Move plunger to %3d mL, then press Enter\n',volumes(i)-30)
     pause()
     
     % read Voltage samples from Photon pins
