@@ -35,7 +35,7 @@ end
 %% Collect data from the Photon
 
 % Enter the Volumes you are measuring
-volumes = (150:-20:90)'; % mL
+volumes = (150:-20:90)'+30; % mL
 samples = 3;  % number of voltage samples to average over at each volume
 
 presVolt = zeros(size(volumes));  % array to store Pressure voltages
