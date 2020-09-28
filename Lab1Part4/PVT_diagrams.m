@@ -69,7 +69,7 @@ PVT = pres.*volumes./temp;  % calculate P*V/T (psi*mL/K)
 %% Calculate the uncertainty
 
 % uncertainty in each measurement
-d_volm = 2.5;       % +/- 1 mL
+d_volm = 2.5;       % +/- 2.5 mL
 d_pres = 0.02*pres; % 2% error 
 d_temp = 1;         % +/- 1 C
 
