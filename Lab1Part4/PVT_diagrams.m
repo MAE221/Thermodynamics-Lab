@@ -34,17 +34,17 @@ end
 
 %% Collect data from the Photon
 
-% Enter the Volumes you are measuring at as an array
-volumes = (150:-40:70)'; % mL
-samples = 5;  % number of voltage samples to average over at each volume
+% Enter the Volumes you are measuring
+volumes = (150:-20:90)'; % mL
+samples = 3;  % number of voltage samples to average over at each volume
 
 presVolt = zeros(size(volumes));  % array to store Pressure voltages
 tempVolt = zeros(size(volumes));  % array to store Temperature voltages
 
 % loop through each Volume measurement
 for i = 1:length(volumes)
-    fprintf('Move plunger to %3d mL\n',volumes(i))
-    pause(2)
+    fprintf('Move plunger to %3d mL, then press Enter\n',volumes(i))
+    pause()
     
     % read Voltage samples from Photon pins
     voltagesIn = zeros(samples,2);
@@ -62,19 +62,47 @@ clear g
 
 %% Convert the Voltage data to Pressure and Temperature measurements
 
-
+pres = calcPres(presVolt);  % calculate Pressure (psi)
+temp = calcTemp(tempVolt);  % calculate Temperature (K)
+PVT = pres.*volumes./temp;  % calculate P*V/T (psi*mL/K)
 
 %% Calculate the uncertainty
 
+% uncertainty in each measurement
+d_volm = 2.5;       % +/- 1 mL
+d_pres = 0.02*pres; % 2% error 
+d_temp = 1;         % +/- 1 C
 
+% uncertainty in the derived quantity
+err = PVT.*sqrt((d_pres./pres).^2+(d_volm./volumes).^2+(d_temp./temp).^2);
+
+one = ones(size(PVT));
 
 %% Plot your measurements
 
-% Figure showing Pressure vs Volume
+figure
+set(gcf,'color','w')
 
-% Figure showing Temperature vs Volume
+% plot Pressure vs Volume
+subplot(1,3,1), hold on
+xlabel('Volume (mL)'), ylabel('Pressure (psi)'), xlim([50, 150])
+errorbar(volumes,pres,d_pres.*one,d_pres.*one,d_volm.*one,d_volm.*one,...
+    'bo','MarkerFaceColor','b','MarkerSize',6,'LineWidth',2)
+set(gca,'FontSize',16,'LineWidth',2), hold off
 
-% Figure showing PV/T vs Volume
+% plot Temperature vs Volume
+subplot(1,3,2), hold on
+xlabel('Volume (mL)'), ylabel('Temperature (C)'), xlim([50, 150])
+errorbar(volumes,temp-273.15,d_temp.*one,d_temp.*one,d_volm.*one,d_volm.*one,...
+    'ro','MarkerFaceColor','r','MarkerSize',6,'LineWidth',2)
+set(gca,'FontSize',16,'LineWidth',2), hold off
+
+% plot PV/T vs Volume
+subplot(1,3,3), hold on
+xlabel('Volume (mL)'), ylabel('PV/T (psi * mL / K)'), xlim([50, 150])
+errorbar(volumes,PVT,err,err,d_volm.*one,d_volm.*one,...
+    'ko','MarkerFaceColor','k','MarkerSize',6,'LineWidth',2)
+set(gca,'FontSize',16,'LineWidth',2), hold off
 
 %% Functions for converting Photon Voltage to Pressure & Temperature
 % You may need to edit some of the values in these functions!
@@ -116,7 +144,7 @@ C = 2.14e-6;
 D =-7.25e-8;
 
 % un-amplified voltage difference between thermistor and reference
-thermVolt = tempVolt./(1 + 1e5/gainResist);
+thermVolt = -tempVolt./(1 + 1e5/gainResist);
 % Rt/R25 (Rt = thermistor resistance, R25 = 10kOhm)
 resRatio = (supplyVolt-thermVolt-tempRefVolt)./(thermVolt+tempRefVolt);
 % temperature (K)
