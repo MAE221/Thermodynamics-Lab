@@ -140,8 +140,8 @@ gainResist = 4.6e3;         % op-amp gain resistance (Ohms)
 % thermistor temperature coefficients
 A = 3.35e-3;
 B = 2.56e-4;
-C = 2.14e-6;
-D =-7.25e-8;
+C = 2.38e-6;
+D = 8.37e-8;
 
 % un-amplified voltage difference between thermistor and reference
 thermVolt = -tempVolt./(1 + 1e5/gainResist);
