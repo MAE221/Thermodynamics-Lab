@@ -5,7 +5,7 @@ name = 'PHOTON_NAME';
 atoken = 'ACCESS_TOKEN';
 
 % Enter the serial port for your Photon. If you have trouble finding the port or connecting to the serial, leave this blank.
-port = 'PORT';
+port = 'Port';
 
 % Enter the input ports for your device.
 presPin = 'A0';
@@ -35,7 +35,7 @@ end
 %% Collect data from the Photon
 
 % Enter the Volumes you are measuring
-volumes = (150:-20:90)'+30; % mL
+volumes = (60:-10:30)'; % mL
 samples = 3;  % number of voltage samples to average over at each volume
 
 presVolt = zeros(size(volumes));  % array to store Pressure voltages
@@ -43,7 +43,7 @@ tempVolt = zeros(size(volumes));  % array to store Temperature voltages
 
 % loop through each Volume measurement
 for i = 1:length(volumes)
-    fprintf('Move plunger to %3d mL, then press Enter\n',volumes(i)-30)
+    fprintf('Move plunger to %3d mL, then press Enter\n',volumes(i))
     pause()
     
     % read Voltage samples from Photon pins
@@ -69,9 +69,9 @@ PVT = pres.*volumes./temp;  % calculate P*V/T (psi*mL/K)
 %% Calculate the uncertainty
 
 % uncertainty in each measurement
-d_volm = 2.5;       % +/- 2.5 mL
-d_pres = 0.02*pres; % 2% error 
-d_temp = 1;         % +/- 1 C
+d_volm = 0.5;       % +/- 0.5 mL
+d_pres = 0.025*pres; % 2.5% error 
+d_temp = 0.5;         % +/- 0.5 C
 
 % uncertainty in the derived quantity
 err = PVT.*sqrt((d_pres./pres).^2+(d_volm./volumes).^2+(d_temp./temp).^2);
@@ -85,21 +85,21 @@ set(gcf,'color','w')
 
 % plot Pressure vs Volume
 subplot(1,3,1), hold on
-xlabel('Volume (mL)'), ylabel('Pressure (psi)'), xlim([50, 150])
+xlabel('Volume (mL)'), ylabel('Pressure (psi)'), xlim([0, 80])
 errorbar(volumes,pres,d_pres.*one,d_pres.*one,d_volm.*one,d_volm.*one,...
     'bo','MarkerFaceColor','b','MarkerSize',6,'LineWidth',2)
 set(gca,'FontSize',16,'LineWidth',2), hold off
 
 % plot Temperature vs Volume
 subplot(1,3,2), hold on
-xlabel('Volume (mL)'), ylabel('Temperature (C)'), xlim([50, 150])
+xlabel('Volume (mL)'), ylabel('Temperature (C)'), xlim([0, 80])
 errorbar(volumes,temp-273.15,d_temp.*one,d_temp.*one,d_volm.*one,d_volm.*one,...
     'ro','MarkerFaceColor','r','MarkerSize',6,'LineWidth',2)
 set(gca,'FontSize',16,'LineWidth',2), hold off
 
 % plot PV/T vs Volume
 subplot(1,3,3), hold on
-xlabel('Volume (mL)'), ylabel('PV/T (psi * mL / K)'), xlim([50, 150])
+xlabel('Volume (mL)'), ylabel('PV/T (psi * mL / K)'), xlim([0, 80])
 errorbar(volumes,PVT,err,err,d_volm.*one,d_volm.*one,...
     'ko','MarkerFaceColor','k','MarkerSize',6,'LineWidth',2)
 set(gca,'FontSize',16,'LineWidth',2), hold off
