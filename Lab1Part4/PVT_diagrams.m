@@ -5,7 +5,7 @@ name = 'PHOTON_NAME';
 atoken = 'ACCESS_TOKEN';
 
 % Enter the serial port for your Photon. If you have trouble finding the port or connecting to the serial, leave this blank.
-port = 'Port';
+port = 'COM6';
 
 % Enter the input ports for your device.
 presPin = 'A0';
@@ -116,13 +116,13 @@ Outputs:
 function pres = calcPres(presVolt)
 
 supplyVolt = 5; % Photon supply voltage (V)
-% Pmin = -15;       % minimum pressure (psi)
-% Pmax = 15;        % maximum pressure (psi)
+% Pmin = 0;       % minimum pressure (psi)
+% Pmax = 100;        % maximum pressure (psi)
 % presRef = 14.7;   % reference/atmospheric pressure (psi)
 
 % pressure (psi)
-% pres = (presVolt/supplyVolt - 0.1) .* (Pmax-Pmin)/0.8 + Pmin + presRef;
 pres = 0.145.*(presVolt/supplyVolt - 0.04)./0.0012858;
+
 end
 
 %{
@@ -141,6 +141,7 @@ gainResist = 4.6e3;         % op-amp gain resistance (Ohms)
 A = 3.35e-3;
 B = 2.56e-4;
 C = 2.38e-6;
+
 D = 8.37e-8;
 
 % un-amplified voltage difference between thermistor and reference
