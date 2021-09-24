@@ -115,14 +115,14 @@ Outputs:
 %}
 function pres = calcPres(presVolt)
 
-supplyVolt = 4.8; % Photon supply voltage (V)
-Pmin = -15;       % minimum pressure (psi)
-Pmax = 15;        % maximum pressure (psi)
-presRef = 14.7;   % reference/atmospheric pressure (psi)
+supplyVolt = 5; % Photon supply voltage (V)
+% Pmin = -15;       % minimum pressure (psi)
+% Pmax = 15;        % maximum pressure (psi)
+% presRef = 14.7;   % reference/atmospheric pressure (psi)
 
 % pressure (psi)
-pres = (presVolt/supplyVolt - 0.1) .* (Pmax-Pmin)/0.8 + Pmin + presRef;
-
+% pres = (presVolt/supplyVolt - 0.1) .* (Pmax-Pmin)/0.8 + Pmin + presRef;
+pres = 0.145.*(presVolt/supplyVolt - 0.04)./0.0012858;
 end
 
 %{
@@ -133,7 +133,7 @@ Outputs:
 %}
 function temp = calcTemp(tempVolt)
 
-supplyVolt = 4.8;           % Photon supply voltage (V)
+supplyVolt = 5;           % Photon supply voltage (V)
 tempRefVolt = supplyVolt/2; % op-amp reference voltage (V)
 gainResist = 4.6e3;         % op-amp gain resistance (Ohms)
 
