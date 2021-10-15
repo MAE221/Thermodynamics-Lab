@@ -94,10 +94,19 @@ while index == 1
     pause(0.1)
 end
 
+P1 = input('Enter the pressure after the evaporator in psi: ');
+P2 = input('Enter the pressure before the condenser in psi: ');
+mdot = input('Enter the mass flow rate in kg/hr: ');
+Power = input('Enter the electrical power in W: ');
+P1 = P1.*0.00689476 + 0.101; % in MPa
+P2 = P2.*0.00689476 + 0.101; % in MPa
+
 fprintf('T1: %1.1f C\n', tempC(i-1,1));
 fprintf('T2: %1.1f C\n', tempC(i-1,2));
 fprintf('T3: %1.1f C\n', tempC(i-1,3));
 fprintf('T4: %1.1f C\n', tempC(i-1,4));
+fprintf('P1: %1.3f MPa\n', P1);
+fprintf('P2: %1.3f MPa\n', P2);
 
 clear g
 
