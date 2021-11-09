@@ -109,7 +109,7 @@ if calibration == 1
 end
 %% Calculate the uncertainty in the heat of combustion
 if calibration == 0
-    uncertainty in each measurement
+ %   uncertainty in each measurement
     d_temp = sqrt(0.5);         % comes from DeltaT = Tf - Ti where Tf and Ti have an error of +/-0.5C
     d_lwire = 0.05;         %error of from the ruler in cm
     d_mF = 5e-4;    %uncertainty of the mass measurement from the device in grams
