@@ -121,7 +121,7 @@ Outputs:
 %}
 function temp = calcTemp(tempVolt)
 
-supplyVolt = 3.3; % Supply voltage (V)
+supplyVolt = 5; % Supply voltage (V)
 
 % thermistor temperature coefficients
 A = 3.35e-3;
